@@ -303,29 +303,50 @@ class _CanvasPaintingState extends State<CanvasPainting> {
     );
   }
 
-  // Method to show color picker dialog
-  void _showColorPicker() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Select Stroke Color'),
-          content: SingleChildScrollView(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                colorMenuItem(Colors.red),
-                colorMenuItem(Colors.green),
-                colorMenuItem(Colors.blue),
-                colorMenuItem(Colors.black),
-                colorMenuItem(Colors.orange),
-              ],
-            ),
+// Method to show color picker dialog
+void _showColorPicker() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Select Stroke Color'),
+        content: SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              colorMenuItem(Colors.red),
+              colorMenuItem(Colors.green),
+              colorMenuItem(Colors.blue),
+              colorMenuItem(Colors.black),
+              colorMenuItem(Colors.orange),
+              // Add more colors as needed
+            ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
+
+// Method to create color menu item for pickers
+Widget colorMenuItem(Color color) {
+  return GestureDetector(
+    onTap: () {
+      setState(() {
+        selectedColor = color; // Update selectedColor when a color is chosen
+      });
+      Navigator.of(context).pop(); // Close the dialog
+    },
+    child: Container(
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+        color: color,
+      ),
+    ),
+  );
+}
+  
 
   // Method to show background color picker dialog
   void _showBackgroundColorPicker() {
@@ -338,10 +359,10 @@ class _CanvasPaintingState extends State<CanvasPainting> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                colorMenuItem(Colors.white),
-                colorMenuItem(Colors.yellow),
-                colorMenuItem(Colors.grey),
-                colorMenuItem(Colors.black),
+                colorMenuItem1(Colors.white),
+                colorMenuItem1(Colors.yellow),
+                colorMenuItem1(Colors.grey),
+                colorMenuItem1(Colors.black),
                 // Add more colors as needed
               ],
             ),
@@ -352,7 +373,7 @@ class _CanvasPaintingState extends State<CanvasPainting> {
   }
 
   // Method to create color menu item for pickers
-  Widget colorMenuItem(Color color) {
+  Widget colorMenuItem1(Color color) {
     return GestureDetector(
       onTap: () {
         setState(() {
